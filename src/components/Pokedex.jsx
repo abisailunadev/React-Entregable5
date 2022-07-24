@@ -11,13 +11,15 @@ const Pokedex = () => {
   const [ pokemons, setPokemons ] = useState([]);
   const [ types, setTypes ] = useState([]);
   const [ pokemonInput, setPokemonInput ] = useState('');
+  const [ pokemonIndex, setPokemonIndex ] = useState(0);
+  const [ showButtons, setShowButtons ] = useState(true);
   //  React Router DOM
   const navigate = useNavigate();
   //  Redux
   const user = useSelector((state) => state.user)
 
   useEffect(() => {
-    axios.get('https://pokeapi.co/api/v2/pokemon')
+    axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${pokemonIndex}`)
       .then(res => setPokemons(res.data.results));
 
     axios.get('https://pokeapi.co/api/v2/type/')
@@ -30,8 +32,51 @@ const Pokedex = () => {
   }
 
   const filterByType = (e) => {
-    axios.get(e.target.value)
-      .then(res => setPokemons(res.data.pokemon))
+    if(e.target.value !== 'https://pokeapi.co/api/v2/pokemon'){
+      axios.get(e.target.value)
+        .then(res => {
+          setPokemons(res.data.pokemon)
+          setShowButtons(false)
+        })
+    }else{
+      axios.get(e.target.value)
+      .then(res => {
+        setPokemons(res.data.results)
+        setShowButtons(true)
+      })
+    }
+  }
+
+  const paginationSubmit = () => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${pokemonIndex}`)
+    .then(res => setPokemons(res.data.results));
+  }
+
+  const paginationButtons = () => {
+    if(pokemonIndex > 0 && showButtons === true){
+      return(
+        <div className="n-p-btns-container">
+        <form onSubmit={paginationSubmit}>
+          <button onClick={() => setPokemonIndex(pokemonIndex - 20)}>
+            <i className='bx bxs-chevron-left bx-xs' ></i>
+          </button>
+          <button onClick={() => setPokemonIndex(pokemonIndex + 20)}>
+            <i className='bx bxs-chevron-right bx-xs' ></i>
+          </button>
+        </form>
+      </div>
+      )
+    }else if(pokemonIndex <= 0 && showButtons === true ){
+      return(
+        <div className="n-p-btns-container one-btn">
+        <form onSubmit={paginationSubmit}>
+          <button onClick={() => setPokemonIndex(pokemonIndex + 20)}>
+            <i className='bx bxs-chevron-right bx-xs' ></i>
+          </button>
+        </form>
+      </div>
+      )
+    }
   }
 
   return (
@@ -57,15 +102,18 @@ const Pokedex = () => {
           </button>
         </form>
 
-        <select onChange={filterByType}>
-          <option value="">Types</option>
-          {types.map(type => (
-            <option value={type.url} key={type.name}>
-              {type.name}
-            </option>
-          ))
-          }
-        </select>
+        <div className="select-container">
+          <p><b>Type</b>:</p>
+          <select onChange={filterByType}>
+            <option value="https://pokeapi.co/api/v2/pokemon">All</option>
+            {types.map(type => (
+              <option value={type.url} key={type.name}>
+                {type.name[0].toUpperCase() + type.name.substring(1)}
+              </option>
+            ))
+            }
+          </select>
+        </div>
       </div>
       
       <div className="pokemons-list-container">
@@ -78,6 +126,7 @@ const Pokedex = () => {
           ))
           }
         </ul>
+        {paginationButtons()}
       </div>
     </div>
   );

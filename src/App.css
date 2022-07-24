@@ -119,10 +119,16 @@ body{
   background-color: aquamarine;
   border: none;
   margin-bottom: 3px;
+  height: 22px;
 }
 
 .pokedex-menu select:focus{
   outline: none;
+}
+
+.select-container{
+  display: flex;
+  gap: 5px;
 }
 
 .pokemons-list-container{
@@ -131,6 +137,8 @@ body{
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pokemons-list{
@@ -140,6 +148,36 @@ body{
   padding: 1rem;
   align-items: center;
   width: 300px;
+}
+
+.n-p-btns-container{
+  width: 80%;
+  margin-bottom: 1rem;
+}
+
+.n-p-btns-container form{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.one-btn form{
+  justify-content: center;
+}
+
+.n-p-btns-container form button{
+  border-radius: 6px;
+  border: none;
+  background-color: rgb(77, 165, 136);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.n-p-btns-container button i{
+  color: white;
 }
 
 @media screen and ( min-width: 380px ){
