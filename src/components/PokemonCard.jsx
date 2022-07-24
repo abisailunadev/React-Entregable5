@@ -4,6 +4,86 @@ import { useNavigate } from 'react-router-dom'
 
 const PokemonCard = ({pokemon}) => {
 
+  //  Colors array
+  const colors = [
+    {
+      id: 'normal',
+      color: 'rgb(168, 168, 120)'
+    },
+    {
+      id: 'fighting',
+      color: 'rgb(192, 48, 40)'
+    },
+    {
+      id: 'flying',
+      color: 'rgb(168, 144, 240)'
+    },
+    {
+      id: 'poison',
+      color: 'rgb(160, 64, 160)'
+    },
+    {
+      id: 'ground',
+      color: 'rgb(224, 192, 104)'
+    },
+    {
+      id: 'rock',
+      color: 'rgb(184, 160, 56)'
+    },
+    {
+      id: 'bug',
+      color: 'rgb(168, 184, 32)'
+    },
+    {
+      id: 'ghost',
+      color: 'rgb(112, 88, 152)'
+    },
+    {
+      id: 'steel',
+      color: 'rgb(184, 184, 208)'
+    },
+    {
+      id: 'fire',
+      color: 'rgb(240, 128, 48)'
+    },
+    {
+      id: 'water',
+      color: 'rgb(104, 144, 240)'
+    },
+    {
+      id: 'grass',
+      color: 'rgb(120, 200, 80)'
+    },
+    {
+      id: 'electric',
+      color: 'rgb(248, 208, 48)'
+    },
+    {
+      id: 'psychic',
+      color: 'rgb(248, 88, 136)'
+    },
+    {
+      id: 'ice',
+      color: 'rgb(152, 216, 216)'
+    },
+    {
+      id: 'dragon',
+      color: 'rgb(112, 56, 248)'
+    },
+    {
+      id: 'dark',
+      color: 'rgb(112, 88, 72)'
+    },
+    {
+      id: 'fairy',
+      color: 'rgb(238, 153, 172)'
+    },
+    {
+      id: 'unknown',
+      color: 'rgb(104, 160, 144)'
+    },
+  ]
+
   //  React
   const [ pokemonData, setPokemonData ] = useState([]);
   //  React Router DOM
@@ -16,6 +96,14 @@ const PokemonCard = ({pokemon}) => {
 
   console.log(pokemonData)
 
+  const setColor = () => {
+    for(let i in colors){
+      if(colors[i].id === pokemonData.types?.[0].type.name){
+        return colors[i].color
+      }
+    }
+  }
+
   //  Javascript
   const pokemonName = pokemonData.name?.[0].toUpperCase() + pokemonData.name?.substring(1)
   const firstType = pokemonData.types?.[0]?.type?.name
@@ -25,7 +113,7 @@ const PokemonCard = ({pokemon}) => {
 
   return (
     <div onClick={() => navigate(`/pokedex/${pokemonData.id}`)}>
-      <li className='pokemon-card'>
+      <li className='pokemon-card' style={{backgroundColor: setColor()}}>
         <div className="p-c-bg">
 
         </div>

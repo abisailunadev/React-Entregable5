@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import PokemonCard from './PokemonCard';
 import { useNavigate } from 'react-router-dom'
-import pokedexicon from '../images/pokedexicon.png'
+import pokedexicon from '../images/pokedexicon.png';
 
 const Pokedex = () => {
 
