@@ -47,6 +47,16 @@ const Pokedex = () => {
     }
   }
 
+  const previousPage = () => {
+    setPokemonIndex(pokemonIndex - 20)
+    window.scrollTo(0, 0);
+  }
+
+  const nextPage = () => {
+    setPokemonIndex(pokemonIndex + 20)
+    window.scrollTo(0, 0);
+  }
+
   const paginationSubmit = () => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${pokemonIndex}`)
     .then(res => setPokemons(res.data.results));
@@ -57,10 +67,10 @@ const Pokedex = () => {
       return(
         <div className="n-p-btns-container">
         <form onSubmit={paginationSubmit}>
-          <button onClick={() => setPokemonIndex(pokemonIndex - 20)}>
+          <button onClick={previousPage}>
             <i className='bx bxs-chevron-left bx-xs' ></i>
           </button>
-          <button onClick={() => setPokemonIndex(pokemonIndex + 20)}>
+          <button onClick={nextPage}>
             <i className='bx bxs-chevron-right bx-xs' ></i>
           </button>
         </form>
@@ -70,7 +80,7 @@ const Pokedex = () => {
       return(
         <div className="n-p-btns-container one-btn">
         <form onSubmit={paginationSubmit}>
-          <button onClick={() => setPokemonIndex(pokemonIndex + 20)}>
+          <button onClick={nextPage}>
             <i className='bx bxs-chevron-right bx-xs' ></i>
           </button>
         </form>
@@ -117,6 +127,7 @@ const Pokedex = () => {
       </div>
       
       <div className="pokemons-list-container">
+        {paginationButtons()}
         <ul className='pokemons-list'>
           {pokemons.map(pokemon => (
             <PokemonCard
