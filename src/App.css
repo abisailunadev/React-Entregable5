@@ -92,6 +92,7 @@ body{
   border: none;
   background-color: aquamarine;
   transition: 0.2s;
+  width: 180px;
 }
 
 .pokedex-menu form input:focus{
@@ -123,9 +124,12 @@ body{
   outline: none;
 }
 
-.pokedex-container ul{
+.pokemons-list-container{
+  width: 100%;
   background-color: rgb(115, 228, 190);
   border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .pokemons-list{
@@ -134,13 +138,29 @@ body{
   gap: 1rem;
   padding: 1rem;
   align-items: center;
+  width: 300px;
+}
+
+@media screen and ( min-width: 380px ){
+  .pokemons-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 370px;
+  }
+}
+
+@media screen and ( min-width: 560px ){
+  .pokemons-list{
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 550px;
+  }
 }
 
 /* Pokemon Card */
 
 .pokemon-card{
   list-style: none;
-  width: 220px;
+  width: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,6 +199,12 @@ body{
   justify-content: space-around;
   margin-bottom: 15px;
   padding: 0 0.5rem;
+}
+
+.p-name p,
+.t-details p,
+.f-details p{
+  font-size: 12px;
 }
 
 /* Pokemon Details */

@@ -68,16 +68,17 @@ const Pokedex = () => {
         </select>
       </div>
       
-
-      <ul className='pokemons-list'>
-        {pokemons.map(pokemon => (
-          <PokemonCard
-            pokemon={pokemon.url ? pokemon.url : pokemon.pokemon.url}
-            key={pokemon.url ? pokemon.url : pokemon.pokemon.url}
-          />
-        ))
-        }
-      </ul>
+      <div className="pokemons-list-container">
+        <ul className='pokemons-list'>
+          {pokemons.map(pokemon => (
+            <PokemonCard
+              pokemon={pokemon.url ? pokemon.url : pokemon.pokemon.url}
+              key={pokemon.url ? pokemon.url : pokemon.pokemon.url}
+            />
+          ))
+          }
+        </ul>
+      </div>
     </div>
   );
 };
