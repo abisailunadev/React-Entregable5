@@ -100,8 +100,6 @@ const PokemonDetailed = () => {
       })
   }, [])
 
-  console.log(pokemonDetails);
-
   const setColor = () => {
     for(let i in colors){
       if(colors[i].id === pokemonDetails.types?.[0].type.name){
@@ -211,18 +209,20 @@ const PokemonDetailed = () => {
                 </div>
               </div>
             </div>
-            <div className="p-d-moves-container">
-              <div className="p-d-moves-title">
-                <p><b>Moves</b></p>
-              </div>
-              <ul className='p-d-moves-ul'>
-                {moves.map(move => (
-                  <li key={move.move.name}>
-                    <p>{(move.move.name)[0].toUpperCase()+(move.move.name).substring(1).replace('-', ' ')}</p>
-                  </li>
-                ))}
-              </ul>
+          </div>
+        </div>
+        <div className="p-d-moves-card">
+          <div className="p-d-moves-container">
+            <div className="p-d-moves-title">
+              <p><b>Moves</b></p>
             </div>
+            <ul className='p-d-moves-ul'>
+              {moves.map(move => (
+                <li key={move.move.name}>
+                  <p>{(move.move.name)[0].toUpperCase()+(move.move.name).substring(1).replace('-', ' ')}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

@@ -57,7 +57,8 @@ const Pokedex = () => {
     window.scrollTo(0, 0);
   }
 
-  const paginationSubmit = () => {
+  const paginationSubmit = (e) => {
+    e.preventDefault();
     axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${pokemonIndex}`)
     .then(res => setPokemons(res.data.results));
   }

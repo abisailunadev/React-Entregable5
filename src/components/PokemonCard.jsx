@@ -94,8 +94,6 @@ const PokemonCard = ({pokemon}) => {
       .then(res => setPokemonData(res.data))
   }, [])
 
-  console.log(pokemonData)
-
   const setColor = () => {
     for(let i in colors){
       if(colors[i].id === pokemonData.types?.[0].type.name){
